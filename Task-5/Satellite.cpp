@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Satellite.h"
+#include <iostream>
 
 
 Satellite::Satellite()
@@ -33,10 +34,14 @@ void Satellite::InitializeCountries()
 
 void Satellite::Broadcast()
 {
-	while (!countryQueue.satisfiedCountries.empty())
+	while (!channels[0].empty || !channels[1].empty)
 	{
-
+		ProcessChannel(0);
+		ProcessChannel(1);
 	}
+	DownForMaintenence();
+
+	std::cout << "Total profit: " << totalProfit;
 }
 
 void Satellite::ProcessChannel(int)
@@ -47,6 +52,26 @@ void Satellite::ProcessChannel(int)
 	// add to maintenenceDuration the amount of TransmissionTime()
 	// Move the channel's country into satisifedCountries vector in countryQueue
 
+}
+
+void Satellite::DownForMaintenence()
+{
+}
+
+int Country::transmissionPrice()
+{
+	switch (terabytePackage)
+	{
+	default:
+	case 1:
+		return 210;
+	case 2:
+		return 350;
+	case 3:
+		return 400;
+	case 4:
+		return 500;
+	}
 }
 
 int Country::TransmissionTime()

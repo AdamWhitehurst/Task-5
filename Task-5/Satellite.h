@@ -31,10 +31,12 @@ public:
 	void InitializeCountries();
 	void Broadcast();
 	void ProcessChannel(int);
+	void DownForMaintenence();
 
 	struct Channel
 	{
 		Country* country;
+		bool empty = false;
 	} channels[2];
 
 	struct CountryQueue
