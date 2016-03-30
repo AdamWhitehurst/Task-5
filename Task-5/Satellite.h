@@ -29,6 +29,7 @@ public:
 	Satellite();
 	~Satellite();
 	void InitializeCountries();
+	void Broadcast();
 	void ProcessChannel(int);
 
 	struct Channel

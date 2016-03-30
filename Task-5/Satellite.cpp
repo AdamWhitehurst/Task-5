@@ -5,6 +5,7 @@
 Satellite::Satellite()
 {
 	InitializeCountries();
+	Broadcast();
 }
 
 
@@ -28,6 +29,14 @@ void Satellite::InitializeCountries()
 		} else countryQueue.satisfiedCountries.push_back(&c);
 	}
 	std::random_shuffle(countryQueue.queuedCountries.begin(), countryQueue.queuedCountries.end());
+}
+
+void Satellite::Broadcast()
+{
+	while (!countryQueue.satisfiedCountries.empty())
+	{
+
+	}
 }
 
 void Satellite::ProcessChannel(int)
