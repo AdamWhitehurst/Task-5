@@ -19,7 +19,7 @@ struct Country
 {
 	enum CountryName { USA, China, Germany, Japan, Switzerland, COUNT } name;
 	int terabytePackage;
-	int transmissionPrice;
+	int transmissionPrice();
 	bool activated;
 	int TransmissionTime();
 };
@@ -29,10 +29,11 @@ public:
 	Satellite();
 	~Satellite();
 	void InitializeCountries();
+	void ProcessChannel(int);
+
 	struct Channel
 	{
 		Country* country;
-		int maintenanceDuration;
 	} channels[2];
 
 	struct CountryQueue
@@ -42,7 +43,7 @@ public:
 			satisfiedCountries;
 	} countryQueue;
 	
-	unsigned int totalProfit;
+	unsigned int totalProfit, maintenanceDuration;
 
 };
 
