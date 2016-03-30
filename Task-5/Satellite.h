@@ -22,6 +22,7 @@ struct Country
 	int transmissionPrice();
 	bool activated;
 	int TransmissionTime();
+	int currentTransmissionAmount;
 };
 class Satellite
 {

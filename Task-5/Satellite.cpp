@@ -44,14 +44,37 @@ void Satellite::Broadcast()
 	std::cout << "Total profit: " << totalProfit;
 }
 
-void Satellite::ProcessChannel(int)
+void Satellite::ProcessChannel(int whichChannel)
 {
-	// Take in int for which cannel to process
+	// Take in int for which channel to process
 	// That channel will transmit data for a based on terabytePackage for the given TransmissionTime()
 	// Add TransmissionPrice() to totalProfit in satellite
 	// add to maintenenceDuration the amount of TransmissionTime()
 	// Move the channel's country into satisifedCountries vector in countryQueue
+	if (countryQueue.queuedCountries.empty()) 
+	{
+		channels[whichChannel].empty = true;
+	}
 
+	if (!channels[whichChannel].country->empty) 
+	{
+		// Have not reached end of transmission time
+		if (channels[whichChannel].country->currentTransmissionAmount != channels[whichChannel].country->TransmissionTime())
+		{
+			totalProfit = totalProfit + channels[whichChannel].country->transmissionPrice();
+			channels[whichChannel].country->currentTransmissionAmount++;
+			maintenanceDuration++;
+
+		}
+
+		// Reached end of transmission time
+		if (channels[whichChannel].country->currentTransmissionAmount == channels[whichChannel].country->TransmissionTime())
+		{
+			countryQueue.satisfiedCountries.push_back(channels[whichChannel].country);
+			channels[whichChannel].country = countryQueue.queuedCountries.back();
+			countryQueue.queuedCountries.pop_back();
+		}
+	}
 }
 
 void Satellite::DownForMaintenence()
