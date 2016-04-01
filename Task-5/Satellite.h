@@ -22,14 +22,13 @@ struct Country
 	int transmissionPrice();
 	bool activated;
 	int TransmissionTime();
-	int currentTransmissionAmount;
+	int currentTransmissionAmount = 0;
 };
 class Satellite
 {
 public:
 	Satellite();
 	~Satellite();
-	void InitializeCountries();
 	void Broadcast();
 	void ProcessChannel(int);
 	void DownForMaintenence();
@@ -37,7 +36,7 @@ public:
 	struct Channel
 	{
 		Country* country;
-		bool empty = false;
+		bool empty = true;
 	} channels[2];
 
 	struct CountryQueue
@@ -47,7 +46,9 @@ public:
 			satisfiedCountries;
 	} countryQueue;
 	
-	unsigned int totalProfit, maintenanceDuration;
+	unsigned int
+		totalProfit = 0,
+		maintenanceDuration = 0;
 
 };
 
